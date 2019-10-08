@@ -1,0 +1,20 @@
+---
+- name: Configure Consul cluster and clients
+  hosts: consul_instances
+  any_errors_fatal: true
+  become: true
+  become_user: root
+
+  roles:
+    - ansible-consul
+  
+- name: Configure Consul cluster and clients
+  hosts: vault_instances
+  any_errors_fatal: true
+  become: true
+  become_user: root
+
+  roles:
+    - ansible-vault
+
+

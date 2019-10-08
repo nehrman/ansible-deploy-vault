@@ -1,0 +1,7 @@
+vault_version: 1.2.3
+#vault_enterprise: true
+#vault_enterprise_pkg: 
+vault_cluster_name: "aws_eu_central"
+vault_datacenter_name: "aws_eu_central"
+vault_tls_disable: true
+vault_acl_consul: true

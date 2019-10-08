@@ -1,0 +1,15 @@
+[consul_instances:children]
+consul_servers
+consul_clients
+
+[vault_instances:children]
+vault_servers
+
+[consul_servers]
+ptfe-dev-consul-[0:4].demoaws.my-v-world.com
+
+[consul_clients]
+ptfe-dev-vault-[0:2].demoaws.my-v-world.com
+
+[vault_servers]
+ptfe-dev-vault-[0:2].demoaws.my-v-world.com

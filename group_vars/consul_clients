@@ -1,0 +1,2 @@
+consul_node_role: client
+consul_acl_vault_policy: true
