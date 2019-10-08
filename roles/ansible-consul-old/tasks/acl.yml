@@ -1,0 +1,9 @@
+---
+- name: Enable ACL on Consul
+  template:
+    src: acl.hcl.j2
+    dest: "{{ consul_configd_path }}/acl.hcl"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: 0660
+  when: not bootstrap_state.stat.exists

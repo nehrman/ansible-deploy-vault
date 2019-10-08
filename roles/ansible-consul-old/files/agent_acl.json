@@ -1,0 +1,1 @@
+node_prefix \"\" { policy = \"write\" } service \"\" { policy = \"read\" } agent_prefix \"\" { policy = \"write\" }
