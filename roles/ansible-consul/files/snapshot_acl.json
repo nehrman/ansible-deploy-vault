@@ -1,0 +1,1 @@
+acl \"\" { policy = \"write\" } key "consul_snapshot/lock" { policy = \"write\" } service "consul-snapshot" { policy = \"write\" } session "" { policy = \"write\" }

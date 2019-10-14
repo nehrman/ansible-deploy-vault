@@ -280,6 +280,10 @@
 
 - name: Bootstrap ACL
   include_tasks: ../tasks/bootstrap.yml
+  when: consul_node_role == "server"
+
+- name: Bootstrap ACL Agent
+  include_tasks: ../tasks/bootstrap_agent.yml
 
 - include_tasks: ../tasks/dnsmasq.yml
   when: consul_dnsmasq_enable | bool

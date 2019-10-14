@@ -170,6 +170,7 @@ consul_acl_datacenter: "{{ lookup('env','CONSUL_ACL_DATACENTER') | default(consu
 consul_acl_down_policy: "{{ lookup('env','CONSUL_ACL_DOWN_POLICY') | default('extend-cache', true) }}"
 consul_acl_token: "{{lookup('env','CONSUL_ACL_TOKEN') | default('', true) }}"
 consul_acl_agent_token: "{{ lookup('env','CONSUL_ACL_AGENT_TOKEN') | default('', true) }}"
+consul_acl_snapshot_token: "{{ lookup('env','CONSUL_ACL_SNAPSHOT_TOKEN') | default('', true) }}"
 consul_acl_agent_master_token: "{{ lookup('env','CONSUL_ACL_AGENT_MASTER_TOKEN') | default('', true) }}"
 
 ### Server ACL settings ###
@@ -241,10 +242,28 @@ consul_performance:
 
 # Snapshot
 consul_snapshot: false
-consul_snapshot_storage: "{{ consul_config_path }}/snaps"
 consul_snapshot_interval: 1h
 consul_snapshot_retain: 30
 consul_snapshot_stale: false
+
+# Snapshot Storage 
+consul_snapshot_storage_type: "{{ lookup('env','CONSUL_SNAPSHOT_STORAGE') | default('local', true) }}"
+
+# Snapshot Storage - local
+consul_snapshot_storage: "{{ consul_config_path }}/snaps"
+
+# Snapshot Storage - AWS S3
+consul_aws_access_key_id: "{{ lookup('env','AWS_ACCESSY_KEY_ID') | default('', true) }}"
+consul_aws_secret_access_key: "{{ lookup('env','AWS_SECRET_KEY') | default('', true) }}"
+consul_aws_s3_region: "{{ lookup('env','AWS_REGION') | default('', true) }}"
+consul_aws_s3_bucket_name: "{{ lookup('env','CONSUL_AWS_S3_BUCKET_NAME') | default('', true) }}"
+consul_aws_s3_encryption: "{{ lookup('env','CONSUL_AWS_S3_ENCRYPTION') | default(false, true) }}"
+consul_aws_static_snapshot_name: "{{ lookup('env','CONSUL_AWS_STATIC_SNAPSHOT_NAME') | default('', true) }}"
+
+# Snapshot Storage - Azure Blob Storage
+consul_azure_account_name: "{{ lookup('env','CONSUL_AZURE_ACCOUNT_NAME') | default('', true) }}"
+consul_azure_account_key: "{{ lookup('env','CONSUL_AZURE_ACCOUNT_KEY') | default('', true) }}"
+consul_azure_container_name: "{{ lookup('env','CONSUL_AZURE_CONTAINER_NAME') | default('', true) }}"
 
 # services
 consul_services: []

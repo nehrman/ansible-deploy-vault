@@ -77,7 +77,8 @@ vault_consul_token: "{{ lookup('env','VAULT_CONSUL_TOKEN') | default('', true) }
 vault_acl_consul: "{{ lookup('env','VAULT_ACL_CONSUL') | default(false, true) }}"
 
 consul_acl_vault_state: "{{ consul_config_path }}/.consul_vault_acl_bootstrapped"
-consul_acl_bootstrap_token: "{{ hostvars[groups['consul_servers'][0]]['consul_acl_bootstrap_token'] }}"
+consul_acl_bootstrap_token: "{{ hostvars[groups.{{ test }}[0]]['consul_acl_bootstrap_token'] }}"
+test: toto
 consul_node_role: "{{ lookup('env','CONSUL_NODE_ROLE') | default('client', true) }}"  
 consul_config_path: "/etc/consul"
 consul_acl_vault_state: "{{ consul_config_path }}/.consul_vault_acl_bootstrapped"

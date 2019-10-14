@@ -1,6 +1,6 @@
 ---
 - name: Configure Consul cluster and clients
-  hosts: consul_instances
+  hosts: lbg_consul_instances
   any_errors_fatal: true
   become: true
   become_user: root
@@ -9,7 +9,7 @@
     - ansible-consul
   
 - name: Configure Consul cluster and clients
-  hosts: vault_instances
+  hosts: lbg_vault_instances
   any_errors_fatal: true
   become: true
   become_user: root
