@@ -7,7 +7,10 @@ consul_acl_down_policy: extend-cache
 consul_acl_bootstrap: false
 consul_acl_agent_policy: false
 consul_client_address: 0.0.0.0
-
+consul_snapshot: true
+consul_snapshot_acl: true
+consul_snapshot_storage_type: "local"
+consul_acl__snapshot_enable: true
 
 
 

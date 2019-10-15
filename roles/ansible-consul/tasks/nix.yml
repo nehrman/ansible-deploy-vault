@@ -39,6 +39,13 @@
   ignore_errors: true
   tags: always
 
+- name: Read Snapshot ACL bootstrapped state
+  stat:
+    path: "{{ consul_acl_snapshot_state }}"
+  register: acl_snapshot_state
+  ignore_errors: true
+  tags: always
+
 - name: Include user and group settings
   import_tasks: user_group.yml
 
@@ -284,6 +291,13 @@
 
 - name: Bootstrap ACL Agent
   include_tasks: ../tasks/bootstrap_agent.yml
+
+- name: Bootstrap Snapshot Agent
+  include_tasks: ../tasks/bootstrap_snapshot.yml
+  when: 
+    - consul_node_role == "server"
+    - consul_snapshot | bool
+    - consul_snapshot_acl | bool
 
 - include_tasks: ../tasks/dnsmasq.yml
   when: consul_dnsmasq_enable | bool

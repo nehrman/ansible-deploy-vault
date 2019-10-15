@@ -6,8 +6,8 @@
     "cert_file": "{{ consul_tls_dir }}/{{ consul_tls_server_crt }}",
     "key_file": "{{ consul_tls_dir }}/{{ consul_server_key }}",
     {% endif %}
-    {% if consul_acl_enable | bool -%}
-    ## SNAPSHOT_TOKEN_PLACEHOLDER ##
+    {% if consul_acl__snapshot_enable | bool -%}
+    "token": "1234567890",
     {% endif %}
         "log": {
             "level": "INFO",
@@ -26,7 +26,7 @@
         {% if consul_snapshot_storage_type == "local" %}
         "local_storage": {
             "path": "{{ consul_snapshot_storage }}"
-        },
+        }
         {% endif %}
         {% if consul_snapshot_storage_type == "aws" %}
         "aws_storage": {
@@ -37,14 +37,14 @@
         "s3_key_prefix": "consul-snapshot",
         "s3_server_side_encryption": "{{ consul_aws_s3_encryption }}",
         "s3_static_snapshot_name":"{{ consul_aws_static_snapshot_name }}"
-        },
+        }
         {% endif %}
         {% if consul_snapshot_storage_type == "azure" %}
         "azure_blob_storage": {
         "account_name": "{{ consul_azure_account_name }}",
         "account_key": "{{ consul_azure_account_key }}",
         "container_name": "{{ consul_azure_container_name }}"
-        },
+        }
         {% endif %}
     }
 }

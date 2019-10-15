@@ -34,7 +34,7 @@
               "Rules": "{{ lookup('file', 'vault_acl.json') }}"
             }
         method: PUT
-        url: http://10.0.1.110:8500/v1/acl/policy
+        url: http://127.0.0.1:8500/v1/acl/policy
         headers:
           X-Consul-Token: "{{ consul_acl_bootstrap_token }}"
       run_once: true
@@ -50,7 +50,7 @@
             "Local": false
           }
         method: PUT
-        url: http://10.0.1.110:8500/v1/acl/token
+        url: http://127.0.0.1:8500/v1/acl/token
         headers:
           X-Consul-Token: "{{ consul_acl_bootstrap_token }}"
         return_content: yes

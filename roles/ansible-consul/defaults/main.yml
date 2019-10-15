@@ -40,7 +40,8 @@ consul_configd_path: "{{ consul_config_path }}/consul.d"
 consul_bootstrap_state: "{{ consul_config_path }}/.consul_bootstrapped"
 consul_acl_bootstrap_state: "{{ consul_config_path }}/.consul_acl_bootstrapped"
 consul_acl_agent_state: "{{ consul_config_path }}/.consul_agent_acl_bootstrapped"
-consul_acl_vault_state: "{{ consul_config_path }}/.consul_vault_acl_bootstrapped"
+#consul_acl_vault_state: "{{ consul_config_path }}/.consul_vault_acl_bootstrapped"
+consul_acl_snapshot_state: "{{ consul_config_path }}/.consul_snapshot_acl_bootstrapped"
 consul_data_path: "/var/consul"
 consul_log_path: "{{ lookup('env','CONSUL_LOG_PATH') | default('/var/log/consul', true) }}"
 consul_log_file: "{{ lookup('env','CONSUL_LOG_FILE') | default('consul.log', true) }}"
@@ -169,12 +170,11 @@ consul_acl_ttl: "{{ lookup('env','CONSUL_ACL_TTL') | default('30s', true)}}"
 consul_acl_datacenter: "{{ lookup('env','CONSUL_ACL_DATACENTER') | default(consul_datacenter, true) }}"
 consul_acl_down_policy: "{{ lookup('env','CONSUL_ACL_DOWN_POLICY') | default('extend-cache', true) }}"
 consul_acl_token: "{{lookup('env','CONSUL_ACL_TOKEN') | default('', true) }}"
-consul_acl_agent_token: "{{ lookup('env','CONSUL_ACL_AGENT_TOKEN') | default('', true) }}"
-consul_acl_snapshot_token: "{{ lookup('env','CONSUL_ACL_SNAPSHOT_TOKEN') | default('', true) }}"
-consul_acl_agent_master_token: "{{ lookup('env','CONSUL_ACL_AGENT_MASTER_TOKEN') | default('', true) }}"
+#consul_acl_agent_token: "{{ lookup('env','CONSUL_ACL_AGENT_TOKEN') | default('', true) }}"
+
+#consul_acl_agent_master_token: "{{ lookup('env','CONSUL_ACL_AGENT_MASTER_TOKEN') | default('', true) }}"
 
 ### Server ACL settings ###
-consul_vault_policy_name: "{{ lookup('env','CONSUL_VAULT_POLICY_NAME') | default('', true) }}"
 consul_acl_default_policy: "{{ lookup('env','CONSUL_ACL_DEFAULT_POLICY') | default('allow', true) }}"
 consul_acl_master_token: "{{ lookup('env','CONSUL_ACL_MASTER_TOKEN') | default('', true) }}"
 consul_acl_master_token_display: "{{ lookup('env','CONSUL_ACL_MASTER_TOKEN_DISPLAY') | default(false, true) }}"
@@ -184,6 +184,9 @@ consul_acl_replication_token: "{{ lookup('env','CONSUL_ACL_REPLICATION_TOKEN') |
 consul_acl_bootstrap_token: "{{ lookup('env','CONSUL_ACL_BOOTSTRAP_TOKEN') | default('', true) }}"
 consul_acl_agent_token: "{{ lookup('env','CONSUL_ACL_AGENT_TOKEN') | default('', true) }}"
 consul_acl_vault_token: "{{ lookup('env','CONSUL_ACL_VAULT_TOKEN') | default('', true) }}"
+consul_acl_snapshot_token: "{{ lookup('env','CONSUL_ACL_SNAPSHOT_TOKEN') | default('', true) }}"
+consul_snapshot_policy_name: "{{ lookup('env','CONSUL_SNAPSHOT_POLICY_NAME') | default('', true) }}"
+consul_agent_policy_name: "{{ lookup('env','CONSUL_AGENT_POLICY_NAME') | default('', true) }}"
 
 ## gossip encryption
 consul_encrypt_enable: "{{ lookup('env','CONSUL_ENCRYPT_ENABLE') | default(true, true) }}"
@@ -242,6 +245,7 @@ consul_performance:
 
 # Snapshot
 consul_snapshot: false
+consul_snapshot_acl: false
 consul_snapshot_interval: 1h
 consul_snapshot_retain: 30
 consul_snapshot_stale: false

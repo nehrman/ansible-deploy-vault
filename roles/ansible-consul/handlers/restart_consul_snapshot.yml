@@ -6,7 +6,7 @@
   when: ansible_os_family != "Windows"
   listen: 'restart consul_snapshot'
 
-- name: restart consul-snpashot on windows
+- name: restart consul-snapshot on windows
   win_service:
     name: consul_snapshot
     state: restarted

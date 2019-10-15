@@ -1,6 +1,6 @@
 ---
 
-### Block used to read or create the Agent's token used by all Consul Agents
+### Block used to read or create the Snapshot' token used by Consul Servers
 
 - block: 
 
@@ -13,7 +13,7 @@
 
     - name: Save acl_snapshot_token from existing configuration
       set_fact:
-        consul_acl_snapshot_token: "{{ agent_config_read.stdout }}"
+        consul_acl_snapshot_token: "{{ snapshot_config_read.stdout }}"
       no_log: true
 
   when:
@@ -28,10 +28,10 @@
             {
               "Name": "{{ consul_snapshot_policy_name }}",
               "Description": "Consul snapshot token",
-              "Rules": "{{ lookup('file', 'snpahsot_acl.json') }}"
+              "Rules": "{{ lookup('file', 'snapshot_acl.json') }}"
             }
         method: PUT
-        url: http://{{ consul_bind_address }}:8500/v1/acl/policy
+        url: http://{{ consul_client_address }}:8500/v1/acl/policy
         headers:
           X-Consul-Token: "{{ consul_acl_bootstrap_token }}"
       run_once: true
@@ -47,7 +47,7 @@
             "Local": false
           }
         method: PUT
-        url: http://{{ consul_bind_address }}:8500/v1/acl/token
+        url: http://{{ consul_client_address }}:8500/v1/acl/token
         headers:
           X-Consul-Token: "{{ consul_acl_bootstrap_token }}"
         return_content: yes
@@ -69,17 +69,17 @@
 
     - name: Register Snapshot ACL Token for future uses
       set_fact:
-        consul_acl_agent_token: "{{ consul_acl_agent_snapshot_keygen.json.SecretID }}"
+        consul_acl_snapshot_token: "{{ consul_acl_snapshot_token_keygen.json.SecretID }}"
 
   when: 
     - not acl_snapshot_state.stat.exists | bool
-    - (consul_acl_agent_token is not defined or consul_acl_agent_token | length == 0)
+    - (consul_acl_snapshot_token is not defined or consul_acl_snapshot_token | length == 0)
 
-- name: Replace ACL token placeholder in Consul config
+- name: Replace ACL token placeholder in Consul-Snapshot config
   lineinfile:
-    path: "{{ consul_configd_path }}/acl.hcl"
-    regexp: "## SNAPSHOT_TOKEN_PLACEHOLDER ##"
-    line: "    \"token\"": \"{{ consul_acl_snapshot_token }}\""
+    path: "{{ consul_config_path }}/consul_snapshot.json"
+    regexp: "\"token\": \"1234567890\""
+    line: "    \"token\": \"{{ consul_acl_snapshot_token }}\","
   notify: 
     - restart consul_snapshot
   when: not acl_snapshot_state.stat.exists | bool

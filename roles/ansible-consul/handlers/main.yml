@@ -26,3 +26,6 @@
 
 - name: start snapshot
   import_tasks: start_snapshot.yml
+
+- name: restart consul_snapshot
+  import_tasks: restart_consul_snapshot.yml

@@ -31,7 +31,7 @@
               "Rules": "{{ lookup('file', 'agent_acl.json') }}"
             }
         method: PUT
-        url: http://{{ consul_bind_address }}:8500/v1/acl/policy
+        url: http://{{ consul_client_address }}:8500/v1/acl/policy
         headers:
           X-Consul-Token: "{{ consul_acl_bootstrap_token }}"
       run_once: true
@@ -47,7 +47,7 @@
             "Local": false
           }
         method: PUT
-        url: http://{{ consul_bind_address }}:8500/v1/acl/token
+        url: http://{{ consul_client_address }}:8500/v1/acl/token
         headers:
           X-Consul-Token: "{{ consul_acl_bootstrap_token }}"
         return_content: yes
