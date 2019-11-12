@@ -31,6 +31,7 @@
   register: acl_bootstrap_state
   ignore_errors: true
   tags: always
+  when: consul_acl_enable | bool
 
 - name: Read Agent ACL bootstrapped state
   stat:
@@ -38,6 +39,7 @@
   register: acl_agent_state
   ignore_errors: true
   tags: always
+  when: consul_acl_enable | bool
 
 - name: Read Snapshot ACL bootstrapped state
   stat:
@@ -45,6 +47,7 @@
   register: acl_snapshot_state
   ignore_errors: true
   tags: always
+  when: consul_acl_snapshot_enable | bool
 
 - name: Include user and group settings
   import_tasks: user_group.yml
@@ -157,7 +160,7 @@
 
 - name: Create ACL configuration
   include_tasks: acl.yml
-#  when: consul_acl_enable | bool
+  when: consul_acl_enable | bool
 
 - name: Create Consul configuration
   import_tasks: config.yml
@@ -287,15 +290,19 @@
 
 - name: Bootstrap ACL
   include_tasks: ../tasks/bootstrap.yml
-  when: consul_node_role == "server"
+  when:
+    - consul_acl_enable | bool 
+    - consul_node_role == "server"
 
 - name: Bootstrap ACL Agent
   include_tasks: ../tasks/bootstrap_agent.yml
+  when: consul_acl_enable | bool
 
-- name: Bootstrap Snapshot Agent
+- name: Bootstrap ACL Snapshot Agent
   include_tasks: ../tasks/bootstrap_snapshot.yml
   when: 
     - consul_node_role == "server"
+    - consul_acl_enable | bool
     - consul_snapshot | bool
     - consul_snapshot_acl | bool
 

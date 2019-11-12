@@ -6,7 +6,7 @@
     "cert_file": "{{ consul_tls_dir }}/{{ consul_tls_server_crt }}",
     "key_file": "{{ consul_tls_dir }}/{{ consul_server_key }}",
     {% endif %}
-    {% if consul_acl__snapshot_enable | bool -%}
+    {% if consul_acl_snapshot_enable | bool -%}
     "token": "1234567890",
     {% endif %}
         "log": {

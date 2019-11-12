@@ -1,6 +1,6 @@
 consul_node_role: server
 consul_autopilot_enable: true
-consul_acl_enable: false
+consul_acl_enable: true
 consul_acl_datacenter: "{{ consul_datacenter}}"
 consul_acl_master_token_display: true 
 consul_acl_down_policy: extend-cache
@@ -10,7 +10,7 @@ consul_client_address: 0.0.0.0
 consul_snapshot: true
 consul_snapshot_acl: true
 consul_snapshot_storage_type: "local"
-consul_acl__snapshot_enable: true
+consul_acl_snapshot_enable: true
 
 
 

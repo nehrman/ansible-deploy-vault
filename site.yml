@@ -9,7 +9,7 @@
   roles:
     - ansible-consul
   
-- name: Configure Consul cluster and clients
+- name: Configure Vault Servers
   hosts: lbg_vault_instances
   order: sorted
   any_errors_fatal: true

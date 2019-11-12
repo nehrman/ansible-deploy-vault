@@ -1,15 +1,15 @@
-[lbg_consul_instances:children]
-lbg_consul_servers
-lbg_consul_clients
+[consul_instances:children]
+consul_servers
+consul_clients
 
-[lbg_vault_instances:children]
-lbg_vault_servers
+[vault_instances:children]
+vault_servers
 
-[lbg_consul_clients]
+[consul_clients]
 ptfe-dev-vault-[0:2].demoaws.my-v-world.com
 
-[lbg_consul_servers]
+[consul_servers]
 ptfe-dev-consul-[0:4].demoaws.my-v-world.com
 
-[lbg_vault_servers]
+[vault_servers]
 ptfe-dev-vault-[0:2].demoaws.my-v-world.com
