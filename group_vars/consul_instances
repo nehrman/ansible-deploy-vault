@@ -16,5 +16,4 @@ consul_install_remotely: true
 consul_snapshot_policy_name: snapshot_policy
 consul_agent_policy_name: agent_policy
 consul_acl_default_policy: deny
-consul_group_name: lbg_consul_instances
 consul_acl_enable: true

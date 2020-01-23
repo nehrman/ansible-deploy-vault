@@ -1,6 +1,6 @@
 ---
 - name: Configure Consul cluster and clients
-  hosts: lbg_consul_instances
+  hosts: consul_instances
   order: sorted
   any_errors_fatal: true
   become: true
@@ -10,7 +10,7 @@
     - ansible-consul
   
 - name: Configure Vault Servers
-  hosts: lbg_vault_instances
+  hosts: vault_instances
   order: sorted
   any_errors_fatal: true
   become: true
