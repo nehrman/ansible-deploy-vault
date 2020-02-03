@@ -3,7 +3,6 @@
 ### Block used to read or create the Agent's token used by all Consul Agents
 
 - block: 
-
     - name: Read ACL Agent token from previously bootstrapped server
       command: "cat {{ consul_config_path }}/.agent_token"
       register: agent_config_read
