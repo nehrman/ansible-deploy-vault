@@ -27,6 +27,7 @@ vault_config_path: /etc/vault.d
 vault_data_path: /var/vault
 vault_log_path: /var/log/vault
 vault_run_path: /var/run/vault
+#vault_raft_path: /var/vault
 
 ### System user and group
 vault_manage_user: true
@@ -59,10 +60,15 @@ vault_node_name: "{{ inventory_hostname_short }}"
 vault_main_config: "{{ vault_config_path }}/vault_main.hcl"
 vault_listener_template: vault_listener.hcl.j2
 
+# raft storage settings
+vault_backend: raft
+vault_raft_data_path: "{{ lookup('env', 'VAULT_RAFT_DATA_PATH') | default(vault_data_path, true) }}"
+vault_raft_node_id: "{{ lookup('env', 'VAULT_RAFT_NODE_ID') | default(inventory_hostname_short, true) }}" 
+ 
 #### Vault storage / backend.
-vault_backend: consul
 vault_backend_consul: vault_backend_consul.j2
 vault_backend_file: vault_backend_file.j2
+vault_backend_raft: vault_backend_raft.j2
 
 vault_cluster_disable: false
 vault_cluster_address: "{{ hostvars[inventory_hostname]['ansible_'+vault_iface]['ipv4']['address'] }}:{{ (vault_port | int) + 1}}"
@@ -83,7 +89,6 @@ vault_acl_consul: "{{ lookup('env','VAULT_ACL_CONSUL') | default(false, true) }}
 
 consul_acl_vault_state: "{{ consul_config_path }}/.consul_vault_acl_bootstrapped"
 consul_acl_bootstrap_token: "{{ hostvars[groups['consul_servers'][0]]['consul_acl_bootstrap_token'] }}"
-test: toto
 consul_node_role: "{{ lookup('env','CONSUL_NODE_ROLE') | default('client', true) }}"  
 consul_config_path: "/etc/consul"
 
