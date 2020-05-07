@@ -1,2 +1,4 @@
 id_rsa_az
 ansible.cfg
+*.crt
+*.key
