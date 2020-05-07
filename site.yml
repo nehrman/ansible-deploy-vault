@@ -1,16 +1,26 @@
 ---
-- name: Configure Consul cluster and clients
-  hosts: consul_instances
+# - name: Configure Consul cluster and clients
+#   hosts: consul_instances
+#   order: sorted
+#   any_errors_fatal: true
+#   become: true
+#   become_user: root
+
+#   roles:
+#     - ansible-consul
+  
+- name: Configure Primary Vault Servers
+  hosts: primary_vault_instances
   order: sorted
   any_errors_fatal: true
   become: true
   become_user: root
-
+ 
   roles:
-    - ansible-consul
-  
-- name: Configure Vault Servers
-  hosts: vault_instances
+    - ansible-vault
+
+- name: Configure Secondary Vault Servers
+  hosts: secondary_vault_instances
   order: sorted
   any_errors_fatal: true
   become: true

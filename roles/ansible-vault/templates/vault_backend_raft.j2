@@ -1,7 +1,7 @@
 backend "raft" {
   path = "{{ vault_raft_data_path }}"
   node_id = "{{ vault_raft_node_id }}"
-  {% for server in groups['vault_raft_servers'] | difference([inventory_hostname]) %}
+  {% for server in groups[vault_raft_group_name] | difference([inventory_hostname]) %}
     {% if not (vault_tls_disable | bool) -%}
   retry_join {
     leader_api_addr =  "https://{{ hostvars[server]['ansible_'+vault_iface]['ipv4']['address'] }}:{{ vault_port }}"

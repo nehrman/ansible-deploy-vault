@@ -1,0 +1,12 @@
+vault_version: 1.4.1
+#vault_enterprise: true
+#vault_enterprise_pkg: 
+vault_cluster_name: "sec_aws_eu_central"
+vault_datacenter_name: "sec_aws_eu_central"
+vault_tls_disable: true
+vault_acl_consul: false
+vault_backend: "raft"
+vault_group_name: "secondary_vault_instances"
+vault_raft_group_name: "secondary_vault_raft_servers"
+ansible_user: "ec2-user"
+ansible_ssh_private_key_file: "id_rsa_az"

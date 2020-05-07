@@ -2,9 +2,13 @@
 consul_servers
 consul_clients
 
-[vault_instances:children]
-vault_servers
-vault_raft_servers
+[primary_vault_instances:children]
+primary_vault_servers
+primary_vault_raft_servers
+
+[secondary_vault_instances:children]
+secondary_vault_servers
+secondary_vault_raft_servers
 
 [consul_clients]
 ptfe-dev-vault-0.demoaws.my-v-world.com 
@@ -18,8 +22,14 @@ ptfe-dev-consul-2.demoaws.my-v-world.com
 ptfe-dev-consul-3.demoaws.my-v-world.com 
 ptfe-dev-consul-4.demoaws.my-v-world.com 
 
-[vault_servers]
+[primary_vault_servers]
 ptfe-dev-vault-[0:2].demoaws.my-v-world.com
 
-[vault_raft_servers]
+[primary_vault_raft_servers]
 ptfe-dev-vault-[0:2].demoaws.my-v-world.com
+
+[secondary_vault_servers]
+ptfe-dev-vault-[3:5].demoaws.my-v-world.com
+
+[secondary_vault_raft_servers]
+ptfe-dev-vault-[3:5].demoaws.my-v-world.com
